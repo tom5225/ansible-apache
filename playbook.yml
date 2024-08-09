@@ -1,0 +1,33 @@
+---
+- name: Gather system information
+  hosts: all
+  become: yes
+  tasks:
+    # Gather facts: 收集所有系統相關資訊
+    - name: Gather facts
+      setup:
+
+    # Display OS information: 顯示作業系統名稱與版本
+    - name: Display OS information
+      debug:
+        msg: "Operating System: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+
+    # Display hostname: 顯示主機名稱
+    - name: Display hostname
+      debug:
+        msg: "Hostname: {{ ansible_hostname }}"
+
+    # Display CPU architecture: 顯示 CPU 架構
+    - name: Display CPU architecture
+      debug:
+        msg: "CPU Architecture: {{ ansible_architecture }}"
+
+    # Display total memory: 顯示總記憶體大小
+    - name: Display total memory
+      debug:
+        msg: "Total Memory: {{ ansible_memtotal_mb }} MB"
+
+    # Display available disk space: 顯示主要磁碟的可用空間
+    - name: Display available disk space
+      debug:
+        msg: "Available Disk Space: {{ ansible_mounts[0].size_available | int // (1024 * 1024) }} MB"
